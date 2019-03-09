@@ -18,7 +18,7 @@ from PIL import Image
 slim = tf.contrib.slim
 checkpoint_path=''
 tf.flags.DEFINE_string(
-	'checkpoint_path', './inception_v1/inception_v1.ckpt', 'Path to checkpoint for inception network.')
+	'checkpoint_path', '', 'Path to checkpoint for inception network.')
 
 tf.flags.DEFINE_string(
 	'input_dir', '','Input directory with images.')
@@ -111,7 +111,7 @@ def main(_):
 		x_input = tf.placeholder(tf.float32, shape=batch_shape)
 		model = InceptionModel(nb_classes)
 		# Run computation
-		# tf.ConfigProtoһ�����ڴ���session��ʱ��������session���в�������
+		
 		with tf.Session(config=tf.ConfigProto(allow_soft_placement=True, log_device_placement=True)) as sess:
 			fgsm_model = FastGradientMethod(model, sess=sess)
 			attack_params = {"eps": 2.0 / 255.0, "clip_min": -1.0, "clip_max": 1.0}
